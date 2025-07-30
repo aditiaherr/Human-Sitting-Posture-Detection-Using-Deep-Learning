@@ -6,28 +6,34 @@ Prolonged sitting, especially in poor posture, is one of the leading causes of m
 
 This system can be deployed using a standard webcam and does not require any external sensors or special hardware, making it a scalable, low-cost, and non-invasive solution for improving workplace ergonomics.
 
+---
+
 ## Visual Output Examples
 
 ### Good vs Bad Sitting Postures
 
 **Detected Good Posture**
 
-![Good Sitting Posture](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/Sitting_Good.png?raw=true)
+![Good Sitting Posture](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/Results/Sitting_Good.png?raw=true)
 
 **Detected Bad Posture**
 
-![Bad Sitting Posture](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/Sitting_Bad.png?raw=true)
+![Bad Sitting Posture](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/Results/Sitting_Bad.png?raw=true)
 
+---
 
 ## Problem Statement
 
 Despite the availability of ergonomic chairs and awareness campaigns, users often fail to maintain a proper sitting posture consistently. Current commercial solutions like smart chairs and posture trackers are either expensive or lack real-time feedback mechanisms. There is a lack of accessible, intelligent tools that can assist users in correcting their sitting habits dynamically and continuously.
 
 This project aims to build a computer vision-based application that can:
+
 - Detect a person in a sitting position using webcam input.
 - Classify their posture as "Good" or "Bad".
 - Provide real-time visual feedback through bounding boxes.
 - Send periodic posture and break reminders to encourage healthier sitting behavior.
+
+---
 
 ## Project Objective
 
@@ -36,13 +42,17 @@ This project aims to build a computer vision-based application that can:
 - Achieve high accuracy, precision, and recall for classification.
 - Deploy the model into a system that processes live video input and responds with annotations and alerts.
 
+---
+
 ## Working Overview
 
-1. **Image Input**: The system captures real-time video using a webcam.
-2. **Object Detection**: YOLOv5 is used to detect human figures in sitting positions.
-3. **Posture Classification**: Based on bounding box region and trained data, the posture is classified as either "Good" or "Bad".
-4. **Visual Feedback**: Bounding boxes are color-coded (Green for Good, Red for Bad) and displayed on the video frame.
-5. **Reminders**: Every 15 minutes, reminders such as “Take a break” or “Maintain good posture” are displayed.
+- **Image Input**: The system captures real-time video using a webcam.
+- **Object Detection**: YOLOv5 is used to detect human figures in sitting positions.
+- **Posture Classification**: Based on bounding box region and trained data, the posture is classified as either "Good" or "Bad".
+- **Visual Feedback**: Bounding boxes are color-coded (Green for Good, Red for Bad) and displayed on the video frame.
+- **Reminders**: Every 15 minutes, reminders such as “Take a break” or “Maintain good posture” are displayed.
+
+---
 
 ## Technical Details
 
@@ -81,24 +91,28 @@ This project aims to build a computer vision-based application that can:
 
 ### System Pipeline
 
-1. **Data Labeling** using Roboflow
-2. **Model Training** with YOLOv5 on Google Colab
-3. **Model Evaluation** using mAP, precision, recall, F1-score
-4. **Live Inference** using OpenCV to draw results on real-time video
+1. Data Labeling using Roboflow  
+2. Model Training with YOLOv5 on Google Colab  
+3. Model Evaluation using mAP, precision, recall, F1-score  
+4. Live Inference using OpenCV to draw results on real-time video  
+
+---
 
 ## Results
 
-| Metric        | Good Posture | Bad Posture | Overall |
-|---------------|--------------|-------------|---------|
-| Precision     | 83.2%        | 65.6%       | 74.4%   |
-| Recall        | 77.5%        | 81.9%       | 79.7%   |
-| mAP@0.5       | 72.8%        | 85.0%       | 78.9%   |
-| mAP@0.5:0.95  | 51.7%        | 55.6%       | 53.6%   |
-| Inference Time| -            | -           | 1.36s   |
+| Metric         | Good Posture | Bad Posture | Overall |
+|----------------|--------------|-------------|---------|
+| Precision      | 83.2%        | 65.6%       | 74.4%   |
+| Recall         | 77.5%        | 81.9%       | 79.7%   |
+| mAP@0.5        | 72.8%        | 85.0%       | 78.9%   |
+| mAP@0.5:0.95   | 51.7%        | 55.6%       | 53.6%   |
+| Inference Time | -            | -           | 1.36s   |
 
 - The system performs better in identifying “Bad” postures due to their distinct visual cues.
 - F1-confidence and precision-recall curves show stable performance across confidence thresholds.
 - Confusion matrix highlights strong classification ability with minor misclassification between background and posture classes.
+
+---
 
 ## System Architecture
 
@@ -109,19 +123,31 @@ This project aims to build a computer vision-based application that can:
 
 The architecture is optimized to process real-time data with minimal latency and can be deployed on a local machine with standard specifications.
 
-## Visual Output Examples
+---
 
-- Real-time detection with bounding boxes labeled "Good" and "Bad"
-- Screenshots of detection on multi-user frames
-- Precision and Recall plots
-- Confusion Matrix
-- Loss vs Epochs graphs
+## Model Evaluation Visuals
+
+**F1-Confidence Curve**
+
+![F1 Curve](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/Results/F1_curve.png?raw=true)
+
+**Precision-Recall Curve**
+
+![PR Curve](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/Results/PR_curve.png?raw=true)
+
+**Multiperson Detection Example**
+
+![Multiperson Detection](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/Results/Multiperson.jpg?raw=true)
+
+---
 
 ## Limitations and Challenges
 
 - The model is currently trained only on static sitting postures; dynamic movements (e.g., leaning forward then correcting) are not detected.
 - Some false positives in multi-person detection when users are partially visible.
 - Real-time processing may vary based on webcam resolution and system specs.
+
+---
 
 ## Future Scope
 
@@ -131,8 +157,17 @@ The architecture is optimized to process real-time data with minimal latency and
 - Add user-specific posture tracking dashboard and analytics.
 - Incorporate reinforcement learning for personalized feedback.
 
+---
+
 ## How to Run
 
-1. Clone the repository:
-git clone https://github.com/your-username/real-time-posture-detection-yolov5
-cd real-time-posture-detection-yolov5
+```bash
+# Clone the repository
+git clone https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning.git
+cd Human-Sitting-Posture-Detection-Using-Deep-Learning
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run real-time detection
+python main.py
