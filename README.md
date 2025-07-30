@@ -1,63 +1,125 @@
-# Real-Time Human Sitting Posture Detection Using YOLOv5
-
-This project aims to develop an efficient system for analyzing human sitting postures from uploaded images and categorizing them as either good or bad posture. It utilizes a combination of YOLOv5 for object detection and Convolutional Neural Networks (CNNs) for posture classification. The process involves collecting and labeling a diverse dataset of sitting posture images, training the model, and evaluating its performance. The system will provide feedback to users on their sitting posture, fostering awareness and potentially leading to improved health outcomes. Future enhancements may include capturing image or video through webcam and giving real-time feedback, integration with mobile apps for on-the-go posture monitoring, and additional features like posture correction suggestions.
-
-## Abstract
-
-Human posture detection is crucial in various applications such as healthcare, human-computer interaction, and workplace ergonomics. Detecting human sitting posture can help facilitate posture correction and improve workplace ergonomics. This study focuses on detecting human sitting posture using the YOLOv5 model for object detection. A dataset of sitting posture images is annotated and used to train the YOLOv5 model. The model is evaluated based on precision, recall, and mean average precision (mAP). The system can be integrated into practical applications like posture correction and workplace ergonomics. Future work includes enhancing the model for real-time feedback and low-complexity implementation.
-
-**Keywords**: CNN, Deep learning, Posture detection, YOLOv5.
+# Real-Time Human Sitting Posture Detection using YOLOv5
 
 ## Introduction
 
-Various sectors require human sitting posture detection to avoid healthcare issues and improve workplace ergonomics. This paper introduces a deep learning model, YOLOv5, that is popular for its speed and efficiency in object detection tasks. We collected a diverse dataset of sitting postures, annotated the images, and used data augmentation techniques for training. The YOLOv5 model was trained using PyTorch, and its performance was evaluated based on precision, recall, and mAP. The model was then integrated into practical applications, such as user interface development for posture correction tools.
+Prolonged sitting, especially in poor posture, is one of the leading causes of musculoskeletal disorders and spinal problems in modern workplaces. As individuals increasingly spend extended hours at desks, there is a pressing need for intelligent systems that can monitor and promote healthy posture habits. This project addresses this need by developing a real-time posture detection system using YOLOv5 and OpenCV, capable of identifying whether a user's sitting posture is "Good" or "Bad" and providing live feedback.
+
+This system can be deployed using a standard webcam and does not require any external sensors or special hardware, making it a scalable, low-cost, and non-invasive solution for improving workplace ergonomics.
 
 ## Problem Statement
 
-Detecting human posture using deep learning models such as YOLOv5 plays a significant role in healthcare and workplace ergonomics. The challenge is to develop a system that can accurately detect and classify various sitting postures, even in different environmental conditions. The solution focuses on the YOLOv5 model, which is known for its speed and accuracy in object detection. The model is trained using a comprehensive dataset of sitting postures, and the system provides feedback on whether the posture is good or bad, contributing to improved health and safety.
+Despite the availability of ergonomic chairs and awareness campaigns, users often fail to maintain a proper sitting posture consistently. Current commercial solutions like smart chairs and posture trackers are either expensive or lack real-time feedback mechanisms. There is a lack of accessible, intelligent tools that can assist users in correcting their sitting habits dynamically and continuously.
 
-## Literature Survey
+This project aims to build a computer vision-based application that can:
+- Detect a person in a sitting position using webcam input.
+- Classify their posture as "Good" or "Bad".
+- Provide real-time visual feedback through bounding boxes.
+- Send periodic posture and break reminders to encourage healthier sitting behavior.
 
-Several techniques have been explored for human posture detection:
+## Project Objective
 
-- **Skeleton-based Online Human Activity Recognition (HAR)**: Methods like Spatio-Temporal Graph Convolutional Networks (ST-GCN) have been used to extract spatial and temporal information for accurate human activity prediction.
-- **Deep Convolutional Neural Networks (CNN)**: CNNs have been used for posture recognition by extracting depth maps or posture features, achieving high precision in human action identification.
-- **YOLOv5 for Real-time Detection**: YOLOv5 is an efficient model for real-time object detection, including human posture detection. It has shown high precision and recall in detecting common postures like sitting, walking, or falling.
-- **Evaluation Metrics**: Precision, recall, and mean average precision (mAP) are used to evaluate model performance. These metrics provide insights into the accuracy and reliability of the posture detection system.
+- Build a posture classification system using YOLOv5 object detection.
+- Use a dataset that simulates realistic office/home environments.
+- Achieve high accuracy, precision, and recall for classification.
+- Deploy the model into a system that processes live video input and responds with annotations and alerts.
 
-## Working Principle
+## Working Overview
 
-1. **Data Collection and Annotation**: A large dataset of sitting posture images is collected, and annotations are added using a tool like LabelImg. The dataset is augmented with techniques such as rotation, scaling, and flipping to increase robustness.
-2. **Model Development and Training**: The YOLOv5 model is trained using the annotated dataset. Data preprocessing, including normalization and resizing, is performed to make the data compatible with YOLOv5 input requirements. The model is trained using PyTorch, with hyperparameters optimized for performance.
-3. **Model Evaluation**: The model's performance is evaluated using a validation dataset. Metrics such as precision, recall, and mAP are calculated to assess accuracy. Iterative optimization is done to fine-tune the model.
-4. **System Integration**: The trained model is integrated into applications such as posture correction tools, ergonomic assessments, and surveillance systems.
+1. **Image Input**: The system captures real-time video using a webcam.
+2. **Object Detection**: YOLOv5 is used to detect human figures in sitting positions.
+3. **Posture Classification**: Based on bounding box region and trained data, the posture is classified as either "Good" or "Bad".
+4. **Visual Feedback**: Bounding boxes are color-coded (Green for Good, Red for Bad) and displayed on the video frame.
+5. **Reminders**: Every 15 minutes, reminders such as “Take a break” or “Maintain good posture” are displayed.
 
-## Result Analysis
+## Technical Details
 
-The model has been evaluated on a dataset with images of various sitting postures labeled as "Sitting_good" or "Sitting_bad". The results show that the model can effectively detect and classify sitting postures. Key performance metrics include:
+### Dataset
 
-- **Precision and Recall**: The precision and recall values are plotted to evaluate the model's accuracy and reliability in detecting postures.
-- **F1 Score**: The F1 curve is used to visualize the balance between precision and recall.
+- Total images: 1,342
+  - Good posture: 702 images
+  - Bad posture: 640 images
+- Data Source: Collected and labeled via Roboflow
+- Preprocessing:
+  - Resized to 640x640 pixels
+  - Normalization and augmentation applied
+  - Real-world scenes with background noise
+- Splits:
+  - Training: 70%
+  - Validation: 20%
+  - Testing: 10%
 
-![Architecture](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/architecture.png)
+### Model
 
-![Results](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/results.png)
+- Architecture: YOLOv5s
+- Training environment: Google Colab with NVIDIA T4 GPU
+- Number of epochs: 200 (initial) + 100 (fine-tuning)
+- Batch size: 25
+- Transfer Learning: Used pretrained YOLOv5 weights
+- Input format: COCO YAML configuration with 2 classes – "Good" and "Bad"
 
-## Challenges and Future Scope
+### Tools and Libraries
 
-Challenges include the variability of images, lighting conditions, and background noise, which can affect posture detection accuracy. Achieving real-time efficiency is also critical for applications in workplace ergonomics. 
+- YOLOv5 (PyTorch)
+- OpenCV
+- NumPy
+- Google Colab
+- Roboflow
+- Flask (optional for front-end)
 
-**Future Scope**:
-- **Real-time Feedback**: The system could be enhanced to capture live images or videos and provide real-time feedback to users on their posture.
-- **Privacy Concerns**: Ensuring data privacy while handling posture data is important, especially when capturing continuous data.
-- **Edge Computing**: Deploying the system with edge computing for faster real-time processing and better efficiency.
+### System Pipeline
 
-## Conclusion
+1. **Data Labeling** using Roboflow
+2. **Model Training** with YOLOv5 on Google Colab
+3. **Model Evaluation** using mAP, precision, recall, F1-score
+4. **Live Inference** using OpenCV to draw results on real-time video
 
-The YOLOv5 model for detecting human sitting postures represents a significant advancement in human-computer interaction. By providing real-time feedback on posture, it can promote healthier habits and improve workplace ergonomics. Future work will focus on refining the model, integrating multimodal data, and exploring new application areas.
+## Results
 
-## Installation
+| Metric        | Good Posture | Bad Posture | Overall |
+|---------------|--------------|-------------|---------|
+| Precision     | 83.2%        | 65.6%       | 74.4%   |
+| Recall        | 77.5%        | 81.9%       | 79.7%   |
+| mAP@0.5       | 72.8%        | 85.0%       | 78.9%   |
+| mAP@0.5:0.95  | 51.7%        | 55.6%       | 53.6%   |
+| Inference Time| -            | -           | 1.36s   |
+
+- The system performs better in identifying “Bad” postures due to their distinct visual cues.
+- F1-confidence and precision-recall curves show stable performance across confidence thresholds.
+- Confusion matrix highlights strong classification ability with minor misclassification between background and posture classes.
+
+## System Architecture
+
+- **Backbone**: Extracts features from input images.
+- **Neck**: Aggregates features at different resolutions.
+- **Head**: Outputs bounding boxes and class scores.
+- **OpenCV Pipeline**: Captures video, processes frame-by-frame, and visualizes results.
+
+The architecture is optimized to process real-time data with minimal latency and can be deployed on a local machine with standard specifications.
+
+## Visual Output Examples
+
+- Real-time detection with bounding boxes labeled "Good" and "Bad"
+- Screenshots of detection on multi-user frames
+- Precision and Recall plots
+- Confusion Matrix
+- Loss vs Epochs graphs
+
+## Limitations and Challenges
+
+- The model is currently trained only on static sitting postures; dynamic movements (e.g., leaning forward then correcting) are not detected.
+- Some false positives in multi-person detection when users are partially visible.
+- Real-time processing may vary based on webcam resolution and system specs.
+
+## Future Scope
+
+- Support dynamic posture tracking over time using temporal models (e.g., LSTM, ST-GCN).
+- Integrate wearable sensors for hybrid vision-sensor approach.
+- Develop mobile and web-based deployment using TensorFlow Lite or ONNX.
+- Add user-specific posture tracking dashboard and analytics.
+- Incorporate reinforcement learning for personalized feedback.
+
+## How to Run
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/Human-Sitting-Posture-Detection.git
+git clone https://github.com/your-username/real-time-posture-detection-yolov5
+cd real-time-posture-detection-yolov5
