@@ -1,4 +1,4 @@
-# Human Sitting Posture Detection Using Deep Learning
+# Real-Time Human Sitting Posture Detection Using YOLOv5
 
 This project aims to develop an efficient system for analyzing human sitting postures from uploaded images and categorizing them as either good or bad posture. It utilizes a combination of YOLOv5 for object detection and Convolutional Neural Networks (CNNs) for posture classification. The process involves collecting and labeling a diverse dataset of sitting posture images, training the model, and evaluating its performance. The system will provide feedback to users on their sitting posture, fostering awareness and potentially leading to improved health outcomes. Future enhancements may include capturing image or video through webcam and giving real-time feedback, integration with mobile apps for on-the-go posture monitoring, and additional features like posture correction suggestions.
 
