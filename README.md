@@ -6,7 +6,18 @@ Prolonged sitting, especially in poor posture, is one of the leading causes of m
 
 This system can be deployed using a standard webcam and does not require any external sensors or special hardware, making it a scalable, low-cost, and non-invasive solution for improving workplace ergonomics.
 
+## Visual Output Examples
+
+### Good vs Bad Sitting Postures
+
+**Detected Good Posture**
+
+![Good Sitting Posture](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/Sitting_Good.png?raw=true)
+
+**Detected Bad Posture**
+
 ![Bad Sitting Posture](https://github.com/aditiaherr/Human-Sitting-Posture-Detection-Using-Deep-Learning/blob/main/Sitting_Bad.png?raw=true)
+
 
 ## Problem Statement
 
